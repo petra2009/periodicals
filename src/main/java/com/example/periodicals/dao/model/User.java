@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -28,5 +30,14 @@ public class User extends BaseEntity {
     @Column(name = "admin", nullable = false)
     private Integer admin;
 
+    @OneToMany(mappedBy = "user")
+    private List<Application> applicationsUser;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

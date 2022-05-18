@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="appl : ${allAplication}">
+    <p th:text="${appl.id}"></p>
+    <p th:text="${appl.date}"></p>
+    <p th:text="${appl.user}"></p>
+
+
+
+</div>
+
+</body>
+</html>
