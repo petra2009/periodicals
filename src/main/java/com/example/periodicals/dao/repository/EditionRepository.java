@@ -10,5 +10,5 @@ import java.util.List;
 public interface EditionRepository extends CrudRepository<Edition, Integer> {
 
     List<Edition> findAll();
-
+    Edition findById(int id);
 }

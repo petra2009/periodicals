@@ -9,8 +9,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
-
-    <title>Title</title>
+    <title>discription</title>
 </head>
 <body>
 <div class="container-fluid p-5 bg-primary text-white text-center">
@@ -51,21 +50,10 @@
         </div>
     </div>
 </nav>
-<div class="container">
-<table class="table" >
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Название издания</th>
-        <th scope="col">Цена за месяц</th>
-    </tr>
-      <tr th:each="edit : ${editList}" th:object="${edit}">
-        <td th:text="*{id}"></a></td>
-        <td><a th:href="@{/editions/edition(id=*{id})}" th:text="*{title}"></a></td>
-        <td th:text="*{pricePerMonth}"></td>
-    </tr>
-</table>
+<div th:each="discr : ${someEdition}" th:object="${discr}">
+    <p th:text="*{title}"></p>
+    <p th:text="*{description}"></p>
 </div>
-
 
 
 

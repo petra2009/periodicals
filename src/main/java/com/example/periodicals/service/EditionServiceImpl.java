@@ -21,4 +21,9 @@ public class EditionServiceImpl implements EditionService {
     public List<Edition> findAllEdition() {
         return editionRepository.findAll();
     }
+
+    @Override
+    public Edition findByIdEdition(int id) {
+        return editionRepository.findById(id);
+    }
 }
