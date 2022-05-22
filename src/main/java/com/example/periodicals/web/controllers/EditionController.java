@@ -34,7 +34,6 @@ public class EditionController {
         List<Edition> editionList = editionService.findAllEdition();
         Edition edition = editionList.stream().filter(e -> e.getId()==id).findFirst().orElse(null);
         model.addAttribute("someEdition", edition);
-        System.out.println(edition);
         return "description";
     }
 }

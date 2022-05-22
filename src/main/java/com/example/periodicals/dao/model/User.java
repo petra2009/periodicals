@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -24,11 +22,21 @@ public class User extends BaseEntity {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password", nullable = false, length = 32)
+    @Column(unique = true)
+    private String login;
+
+    @Column(name = "password", nullable = false)
+    //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$", message = "errors.user.password")
     private String pass;
 
-    @Column(name = "admin", nullable = false)
-    private Integer admin;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    //@Column(name = "admin", nullable = false)
+    //private Integer admin;
+
+
+
 
     @OneToMany(mappedBy = "user")
     private List<Application> applicationsUser;
