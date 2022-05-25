@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,12 +10,30 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="@/css/myStyles.css" rel="stylesheet">
-
+    <!--
+    <link th:href="@{/css/myStyles.css}" rel="stylesheet">
+    -->
     <title>Title</title>
 </head>
 <body>
-<div class="container-fluid p-3 bg-primary text-white text-center">
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end" th:fragment="menu">
+
+    <form sec:authorize="!isAuthenticated()">
+        <input type="button" onclick="window.location.href = '/login';" th:value="#{input}"/>
+    </form>
+
+    <form method="POST" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+        <input type="submit" th:value="#{logout}"/>
+    </form>
+
+    <form>
+        <a class="btn btn-outline-success btn-sm" th:if="${#locale.toString()=='ru_RU'}" href="?lang=en_En">En</a>
+        <a class="btn btn-outline-success btn-sm" th:if="${#locale.toString()=='en_EN'}" href="?lang=ru_Ru">Ru</a>
+    </form>
+</div>
+
+<div class="container-fluid p-3 bg-primary text-white text-center" th:fragment="header">
     <h1>Периодические издания</h1>
     <p>Система заказа переодических изданий</p>
 </div>
@@ -21,36 +41,27 @@
 <nav th:fragment="navigation" class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!--
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/home" th:text="#{home}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/editions/all">Каталог</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <a class="nav-link" href="/editions/all" th:text="#{catalog}"></a>
                 </li>
             </ul>
+
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success" type="submit" th:text="#{search}">Search</button>
             </form>
+
         </div>
     </div>
 </nav>

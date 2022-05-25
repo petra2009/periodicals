@@ -23,6 +23,7 @@ public class ApplicationController {
         model.addAttribute("allAplication", applicationList);
         System.out.println(applicationList);
         return "applications";
-
     }
+
+
 }

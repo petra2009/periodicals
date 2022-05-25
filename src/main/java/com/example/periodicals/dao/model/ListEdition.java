@@ -24,4 +24,13 @@ public class ListEdition extends BaseEntity {
     @ManyToOne
     @JoinColumn(name ="edition_id")
     private Edition edition;
+
+    @Override
+    public String toString() {
+        return "ListEdition{" +
+                "numberOfMonths=" + numberOfMonths +
+                ", application=" + application +
+                ", edition=" + edition +
+                '}';
+    }
 }
