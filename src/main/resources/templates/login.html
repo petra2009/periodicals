@@ -57,6 +57,7 @@ body {
   border:none;
   color:white;
   margin-top:20px;
+  display: flex;
 }
 
 @media (max-width: 576px) {
@@ -69,22 +70,23 @@ body {
 <body>
 <div class="registration-cssave">
     <form th:action="@{/login}" method="post">
-        <h3 class="text-center">Форма входа</h3>
+        <h3 class="text-center" th:text="#{authorization}"></h3>
         <div class="form-group">
             <input class="form-control item" type="text" name="user" maxlength="15" minlength="4"
-                   pattern="^[a-zA-Z0-9_.-]*$" id="login" placeholder="Логин" required>
+                   pattern="^[a-zA-Z0-9_.-]*$" id="login" th:placeholder="#{login}" required>
         </div>
         <div class="form-group">
             <input class="form-control item" type="password" name="pass" minlength="4" id="password"
-                   placeholder="Пароль" required>
+                   th:placeholder="#{password}" required>
         </div>
         <!--
         <div class="form-group">
             <input class="form-control item" type="email" name="email" id="email" placeholder="Email" required>
         </div>
         -->
-        <div class="form-group">
-            <button class="btn btn-primary btn-block create-account" type="submit">Вход</button>
+        <div class="form-group text-center">
+            <button class="btn btn-primary btn-block create-account mx-auto " type="submit" th:text="#{input}"></button>
+            <a th:href="@{/register}" th:text="#{register}"></a>
         </div>
     </form>
 </div>

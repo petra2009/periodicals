@@ -21,21 +21,27 @@
 
 
 <div class="container">
-<table class="table" >
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Название издания</th>
-        <th scope="col">Цена за месяц</th>
-    </tr>
-      <tr th:each="edit : ${editList}" th:object="${edit}">
-        <td th:text="*{id}"></a></td>
-        <td><a th:href="@{/editions/edition(id=*{id})}" th:text="*{title}"></a></td>
-        <td th:text="*{pricePerMonth}"></td>
-    </tr>
-</table>
+    <table class="table" th:action="@{/subscription}" method="post">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название издания</th>
+            <th scope="col">Цена за месяц</th>
+        </tr>
+        <tr th:each="edit : ${editList}" th:object="${edit}">
+            <td th:text="*{id}" ></a></td>
+            <td><a th:href="@{/editions/edition(id=*{id})}" th:text="*{title}"></a></td>
+            <td th:text="*{pricePerMonth}"></td>
+            <td>
+                <form sec:authorize="isAuthenticated()">
+                    <input type="number" name="months">
+                    <input type="submit" th:value="Подписаться"/>
+                </form>
+            </td>
+
+
+        </tr>
+    </table>
 </div>
-
-
 
 
 </body>

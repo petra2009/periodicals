@@ -4,10 +4,7 @@ import com.example.periodicals.dao.model.Edition;
 import com.example.periodicals.service.EditionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,11 +26,16 @@ public class EditionController {
         return "editions";
     }
 
-    @GetMapping("/edition")
+    @GetMapping("/{id}")
     public String getByIdEdition (Model model, @RequestParam("id") int id) {
         List<Edition> editionList = editionService.findAllEdition();
         Edition edition = editionList.stream().filter(e -> e.getId()==id).findFirst().orElse(null);
         model.addAttribute("someEdition", edition);
         return "description";
     }
+
+
+
+
+
 }
