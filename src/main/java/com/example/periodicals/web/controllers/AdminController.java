@@ -35,27 +35,27 @@ public class AdminController {
         return "adminPage";
     }
 
-    @GetMapping("/edition/all")
+    @GetMapping("/editions")
     public String getAdminPageEdition(Model model) {
         List<Edition> editionList = editionService.findAllEdition();
         model.addAttribute("editList", editionList);
         return "adminPage";
     }
 
-    @GetMapping("/user/all")
+    @GetMapping("/users")                            //список всех подписчиков
     public String getAdminPageUsers(Model model) {
         List<User> allUser = userService.findAllUser();
         model.addAttribute("users", allUser);
         return "adminPage";
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/userDelete{id}")
     public String getDeleteUserById(@RequestParam("id") int id) {
         userService.deleteUserById(id);
         return "adminPage";
     }
 
-    @GetMapping("/applications")
+    @GetMapping("/applications")                        //выполненые подписки
     public String getApplicotionsUssers(Model model) {
         List<Application> applications = applicationService.findAllApplication();
         model.addAttribute("applications", applications);

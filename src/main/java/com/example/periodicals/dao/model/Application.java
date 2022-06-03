@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,11 +25,23 @@ public class Application extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Application(LocalDate date, User user) {
+        this.date = date;
+        this.user = user;
+    }
+
     @OneToMany (mappedBy = "application")
     private List<ListEdition> listEditionAp;
 
     @OneToOne(mappedBy = "applicationBl")
     private BlackList blackList;
+
+ //   public void addEdition (Edition edition) {
+ //       if (listEditionAp==null || listEditionAp.isEmpty()) {
+ //           listEditionAp = new ArrayList<>();
+ //           }
+ //       listEditionAp.add(edition);
+ //   }
 
     @Override
     public String toString() {

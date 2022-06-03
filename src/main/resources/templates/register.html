@@ -7,7 +7,7 @@
     <link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="js/index.js"></script>
+
 </head>
 <style>
   html {
@@ -196,10 +196,14 @@
             <fieldset>
                 <p class="login-msg"></p>
                 <form th:action="@{/userRegister}" method="post" th:object="${user}">
+
                     <input type="text" th:placeholder="#{enter your full name}" required th:field="*{name}" id="name"/>
-                    <input type="password" th.placeholder="#{create a password}" required th:field="*{pass}" id="pass"/>
-                    <input type="text" th:placeholder="create a username" required th:field="*{login}" id="login"/>
+                    <input type="password" th:placeholder="#{create a password}" required th:field="*{pass}" id="pass"/>
+
+                    <input type="text" th:placeholder="#{create a username}" required th:field="*{login}" id="login"/>
+
                     <input type="submit" th:value="#{register}"/>
+
                 </form>
                 <a th:href="@{/login}" class="flipper" th:text="#{already registered? To come in}"></a>
             </fieldset>

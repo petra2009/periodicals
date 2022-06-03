@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "list_editions")
@@ -24,6 +25,14 @@ public class ListEdition extends BaseEntity {
     @ManyToOne
     @JoinColumn(name ="edition_id")
     private Edition edition;
+
+//
+//    public void addEdition (Edition edition) {
+//        if (listEditionAp==null || listEditionAp.isEmpty()) {
+//            listEditionAp = new ArrayList<>();
+//        }
+//        listEditionAp.add(edition);
+//    }
 
     @Override
     public String toString() {

@@ -10,5 +10,9 @@ import java.util.List;
 @Repository
 public interface ApplicationRepository extends CrudRepository<Application, Integer> {
 
-    List<Application> findAll();
+    List<Application> findAllById(int id);
+
+    Application findByUserId(int id);
+
+
 }

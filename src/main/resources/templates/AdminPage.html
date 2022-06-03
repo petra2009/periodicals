@@ -12,8 +12,8 @@
     <div class="row">
         <div class="col-sm-2">
             <nav class="nav flex-column">
-                <a class="nav-link active" aria-current="page" th:href="@{/admin/user/all}" th:text="#{users}"></a>
-                <a class="nav-link" th:href="@{/admin/edition/all}" th:text="#{editions}"></a>
+                <a class="nav-link active" aria-current="page" th:href="@{/admin/users}" th:text="#{users}"></a>
+                <a class="nav-link" th:href="@{/admin/editions}" th:text="#{editions}"></a>
                 <a class="nav-link" th:href="@{/admin/applications}" th:text="#{orders}"></a>
                 <a class="nav-link disabled" th:text="#{black list}"></a>
             </nav>
@@ -45,7 +45,7 @@
                         <td th:text="*{id}"></a></td>
                         <td th:text="*{name}"></td>
                         <td th:text="*{email}"></td>
-                        <td><a th:href="@{user?user(id=*{id})}" th:text="#{delete}"></a></td>
+                        <td><a th:href="@{userDelete(id=*{id})}" th:text="#{delete}"></a></td>
                     </tr>
                 </table>
             </div>
@@ -79,6 +79,7 @@
                                     th:text="${ed.pricePerMonth}*${edition.numberOfMonths}"></tr>
                             </table>
                         </td>
+                    </tr>
                 </table>
             </div>
         </div>

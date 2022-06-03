@@ -1,10 +1,10 @@
 package com.example.periodicals.dao.repository;
 
-import com.example.periodicals.dao.model.Edition;
+import com.example.periodicals.dao.model.BlackList;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EditionRepository extends CrudRepository<Edition, Integer> {
+public interface BlackListRepository extends CrudRepository<BlackList, Integer> {
 
 }

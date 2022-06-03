@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<div th:replace="home::menu"></div>
+
+<h1>User profile</h1>
+
+<form th:action="@{/profile}" method="post">
+    <table border="1" class="table" >
+        <tr>
+            <td th:text="${users.id}"></td>
+        </tr>
+        <tr>
+            <td th:text="name"></td>
+            <td th:text="${users.name}"></td>
+            <td>
+                <input type="text" name="name" placeholder="new name">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="email"></td>
+            <td th:text="${users.email}"></td>
+            <td>
+                <input type="text" name="email" placeholder="new email">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="login"></td>
+            <td th:text="${users.login}"></td>
+        </tr>
+    </table>
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>

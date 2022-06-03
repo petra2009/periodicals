@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EditionServiceImpl implements EditionService {
@@ -19,11 +20,25 @@ public class EditionServiceImpl implements EditionService {
 
     @Override
     public List<Edition> findAllEdition() {
-        return editionRepository.findAll();
+        return (List<Edition>) editionRepository.findAll();
+    }
+
+    public Optional<Edition> findEditionById(int id) {
+        return editionRepository.findById(id);
     }
 
     @Override
-    public Edition findByIdEdition(int id) {
-        return editionRepository.findById(id);
+    public Edition editEdition(Edition edition) {
+        return editionRepository.save(edition);
+    }
+
+    @Override
+    public Edition addEdition(Edition edition) {
+        return editionRepository.save(edition);
+    }
+
+    @Override
+    public void deleteEditionById(int id) {
+        editionRepository.deleteById(id);
     }
 }

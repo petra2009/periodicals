@@ -25,24 +25,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/*","/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers("/*", "/**").hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/*","/{\\id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                    .antMatchers("/*", "/**").hasAuthority("ROLE_ADMIN")
                 .and()
-                .formLogin()
+                    .formLogin()
+
                 .and()
-                .authorizeRequests()
-                .antMatchers("/*","/**")
-                .permitAll()
+                    .authorizeRequests()
+                    .antMatchers("/*","/**")
+                    .permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .usernameParameter("user")
-                .passwordParameter("pass")
-                .defaultSuccessUrl("/home")
+                    .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .usernameParameter("login")
+                    .passwordParameter("pass")
+                    .defaultSuccessUrl("/home")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/home");
+                    .logout()
+                    .logoutSuccessUrl("/home")
+                //.and().csrf().disable()
+        ;
     }
 
     @Override

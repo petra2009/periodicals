@@ -1,5 +1,6 @@
 package com.example.periodicals.web.controllers;
 
+import com.example.periodicals.dao.model.Application;
 import com.example.periodicals.dao.model.Edition;
 import com.example.periodicals.service.EditionService;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,14 @@ import java.util.List;
 public class EditionController {
 
     private EditionService editionService;
+    private Application application;
+    private final ListEditionService editionServiceImpl;
 
-
-    public EditionController(EditionService editionService) {
+    @Autowired
+    public EditionController(EditionService editionService, ListEditionService editionServiceImpl) {
         this.editionService = editionService;
+
+        this.editionServiceImpl = editionServiceImpl;
     }
 
     @GetMapping("/all")
@@ -32,6 +37,12 @@ public class EditionController {
         Edition edition = editionList.stream().filter(e -> e.getId()==id).findFirst().orElse(null);
         model.addAttribute("someEdition", edition);
         return "description";
+    }
+
+    @PostMapping("/subscription")
+    public String getAddEditionInBasket(@RequestParam("months") int months, @RequestParam("id") int editionId) {
+        editionServiceImpl.addEditionToApplication(editionId, months);
+        return "redirect: /editions/all";
     }
 
 

@@ -37,8 +37,7 @@ public class RegistrationController {
         if (errors.hasErrors())
             return "register";
         user.setRole(Role.ROLE_USER);
-        userService.save(user);
+        userService.addUser(user);
         return "login";
-
     }
 }

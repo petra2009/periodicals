@@ -21,6 +21,8 @@ public class User extends BaseEntity {
 
     @Column(name = "email")
     private String email;
+    
+    private int currentApplicationId;
 
     @Column(unique = true)
     private String login;
@@ -34,9 +36,6 @@ public class User extends BaseEntity {
 
     //@Column(name = "admin", nullable = false)
     //private Integer admin;
-
-
-
 
     @OneToMany(mappedBy = "user")
     private List<Application> applicationsUser;

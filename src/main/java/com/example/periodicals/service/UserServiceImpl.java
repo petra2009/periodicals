@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUser() {
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername (String login) throws UsernameNotFoundException {
-        User user = userRepository.findUserByLogin(login);
+        User user = userRepository.findUserByLogin(login);   //челик из БД
         Set<Role> roles = new HashSet<>();
         if (user==null)
             throw new UsernameNotFoundException("not user");
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user){
+    public void addUser(User user){
         user.setPass(bCryptPasswordEncoder.encode(user.getPass()));
         userRepository.save(user);
     }
@@ -56,5 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
+    }
+
+    public Optional<User> findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User save(User user) {
+        userRepository.save(user);
+        return user;
     }
 }
