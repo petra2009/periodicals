@@ -27,7 +27,7 @@ public class Edition extends BaseEntity {
     @Column(name = "price_per_month", precision = 5, scale = 2)
     private BigDecimal pricePerMonth;
 
-    @OneToMany (mappedBy = "edition")
+    @OneToMany (mappedBy = "edition",cascade=CascadeType.ALL)
     private List<ListEdition> listEditionEd;
 
 

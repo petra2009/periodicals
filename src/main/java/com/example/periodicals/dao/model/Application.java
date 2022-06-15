@@ -30,7 +30,7 @@ public class Application extends BaseEntity {
         this.user = user;
     }
 
-    @OneToMany (mappedBy = "application")
+    @OneToMany (mappedBy = "application",cascade=CascadeType.ALL)
     private List<ListEdition> listEditionAp;
 
     @OneToOne(mappedBy = "applicationBl")
@@ -50,4 +50,5 @@ public class Application extends BaseEntity {
                 ", user=" + user +
                 '}';
     }
+
 }

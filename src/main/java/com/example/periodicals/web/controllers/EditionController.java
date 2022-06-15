@@ -3,6 +3,8 @@ package com.example.periodicals.web.controllers;
 import com.example.periodicals.dao.model.Application;
 import com.example.periodicals.dao.model.Edition;
 import com.example.periodicals.service.EditionService;
+import com.example.periodicals.service.ListEditionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +32,10 @@ public class EditionController {
         return "editions";
     }
 
-    @GetMapping("/{id}")
-    public String getByIdEdition (Model model, @RequestParam("id") int id) {
+    @GetMapping("/description/{id}")
+    public String getByIdEdition(Model model, @RequestParam("id") int id) {
         List<Edition> editionList = editionService.findAllEdition();
-        Edition edition = editionList.stream().filter(e -> e.getId()==id).findFirst().orElse(null);
+        Edition edition = editionList.stream().filter(e -> e.getId() == id).findFirst().orElse(null);
         model.addAttribute("someEdition", edition);
         return "description";
     }
@@ -43,9 +45,6 @@ public class EditionController {
         editionServiceImpl.addEditionToApplication(editionId, months);
         return "redirect:/editions/all";
     }
-
-
-
 
 
 }

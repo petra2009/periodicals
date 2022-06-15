@@ -32,7 +32,8 @@
             <td><a th:href="@{/editions/description/edition(id=*{id})}" th:text="*{title}"></a></td>
             <td th:text="*{pricePerMonth}"></td>
             <td>
-                <form sec:authorize="isAuthenticated()">
+                <form th:action="@{/editions/subscription}" method="post" sec:authorize="isAuthenticated()">
+                    <input type="hidden" name="id" th:value="*{id}">
                     <input type="number" name="months">
                     <input type="submit" th:value="Подписаться"/>
                 </form>

@@ -18,11 +18,11 @@ public class ListEdition extends BaseEntity {
     @Column(name = "number_of_months")
     private Integer numberOfMonths;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "applications_id")
     private Application application;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name ="edition_id")
     private Edition edition;
 
