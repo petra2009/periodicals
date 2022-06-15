@@ -1,7 +1,6 @@
 package com.example.periodicals.service;
 
 import com.example.periodicals.dao.model.Application;
-import com.example.periodicals.dao.model.Edition;
 import com.example.periodicals.dao.model.ListEdition;
 import com.example.periodicals.dao.model.User;
 import com.example.periodicals.dao.repository.ApplicationRepository;
@@ -62,13 +61,19 @@ public class ListEditionServiceImpl implements ListEditionService {
         return (List<ListEdition>) listEditionRepository.findAll();
     }
 
-    //    @Override
-//    public void addEdition(Application application, Edition edition) {
-//        List<Edition> newEditionList = editions == null ? new ArrayList<>() : new ArrayList<>(editions);
-//        newEditionList.addAll(getEditionListById(editionIds));
-//        listEdition.setEdition(newEditionList);
-//        listEditionRepository.save(listEdition);
+//    @Override
+//    public void deleteListEdition(ListEdition listEdition) {
+//        listEditionRepository.deleteListEdition(listEdition);
 //    }
 
+    @Override
+    public List<ListEdition> findAllByApplicationId(int applicationId) {
+        List<ListEdition> listEditionApplication = listEditionRepository.findAllByApplicationId(applicationId);
+        return listEditionApplication;
+    }
 
+    @Override
+    public void deleteById(int id) {
+        listEditionRepository.deleteById(id);
+    }
 }

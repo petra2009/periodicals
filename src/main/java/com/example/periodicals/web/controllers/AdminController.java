@@ -8,11 +8,12 @@ import com.example.periodicals.service.EditionService;
 import com.example.periodicals.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebParam;
+import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -62,5 +63,29 @@ public class AdminController {
         return "adminPage";
     }
 
+    @GetMapping("/deleteEdition{id}")
+    public String getDeleteEdition(@RequestParam("id") int id) {
+        System.out.println("Controller: "+id);
+        editionService.deleteEditionById(id);
+        return "adminPage/editions";
+    }
+
+    @ModelAttribute("edition")
+    public Edition getEntityEdition() {
+        return new Edition();
+    }
+
+    @GetMapping("/addEdition")
+    public String getAddEdition() {
+        return "addEdition";
+    }
+
+    @PostMapping("/addEdition")
+    public String getSaveEdition(@Valid Edition edition, Errors error) {
+        if (error.hasErrors())
+            return "editions";
+        editionService.addEdition(edition);
+        return "redirect: admin/editions";
+    }
 
 }

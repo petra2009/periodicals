@@ -29,7 +29,7 @@
         </tr>
         <tr th:each="edit : ${editList}" th:object="${edit}">
             <td th:text="*{id}" ></td>
-            <td><a th:href="@{/editions/edition(id=*{id})}" th:text="*{title}"></a></td>
+            <td><a th:href="@{/editions/description/edition(id=*{id})}" th:text="*{title}"></a></td>
             <td th:text="*{pricePerMonth}"></td>
             <td>
                 <form sec:authorize="isAuthenticated()">

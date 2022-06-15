@@ -26,14 +26,6 @@ public class ListEdition extends BaseEntity {
     @JoinColumn(name ="edition_id")
     private Edition edition;
 
-//
-//    public void addEdition (Edition edition) {
-//        if (listEditionAp==null || listEditionAp.isEmpty()) {
-//            listEditionAp = new ArrayList<>();
-//        }
-//        listEditionAp.add(edition);
-//    }
-
     @Override
     public String toString() {
         return "ListEdition{" +

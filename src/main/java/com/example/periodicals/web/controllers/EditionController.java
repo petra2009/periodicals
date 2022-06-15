@@ -20,7 +20,6 @@ public class EditionController {
     @Autowired
     public EditionController(EditionService editionService, ListEditionService editionServiceImpl) {
         this.editionService = editionService;
-
         this.editionServiceImpl = editionServiceImpl;
     }
 
@@ -40,9 +39,9 @@ public class EditionController {
     }
 
     @PostMapping("/subscription")
-    public String getAddEditionInBasket(@RequestParam("months") int months, @RequestParam("id") int editionId) {
+    public String getAddEditionInApplication(@RequestParam("months") int months, @RequestParam("id") int editionId) {
         editionServiceImpl.addEditionToApplication(editionId, months);
-        return "redirect: /editions/all";
+        return "redirect:/editions/all";
     }
 
 

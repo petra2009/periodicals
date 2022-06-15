@@ -14,10 +14,14 @@
 <div>
     <table class="table">
         <tr  th:each="editionList : ${editList}">
+            <td th:text="${editionList.id}"></td>
             <td th:each="edition : ${editionList.edition}" th:text="${edition.title}"></td>
             <td th:text="${editionList.numberOfMonths}"></td>
             <td th:each="edition : ${editionList.edition}" th:text="${edition.pricePerMonth}*${editionList.numberOfMonths}"></td>
-
+            <form th:action="@{/user/deleteListEdition}" method="post">
+                <input type="hidden" name="id" th:value="${editionList.id}">
+                <td><button type="submit" th:value="#{delete}"></button></td>
+            </form>
 
 
         </tr>

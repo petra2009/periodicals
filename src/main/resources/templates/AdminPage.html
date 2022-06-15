@@ -8,82 +8,86 @@
 <body>
 <div th:replace="home::menu"></div>
 
-<div>
-    <div class="row">
-        <div class="col-sm-2">
-            <nav class="nav flex-column">
-                <a class="nav-link active" aria-current="page" th:href="@{/admin/users}" th:text="#{users}"></a>
-                <a class="nav-link" th:href="@{/admin/editions}" th:text="#{editions}"></a>
-                <a class="nav-link" th:href="@{/admin/applications}" th:text="#{orders}"></a>
-                <a class="nav-link disabled" th:text="#{black list}"></a>
-            </nav>
+<div class="row">
+    <div class="col-sm-2">
+        <nav class="nav flex-column">
+            <a class="nav-link active" aria-current="page" th:href="@{/admin/users}" th:text="#{users}"></a>
+            <a class="nav-link" th:href="@{/admin/editions}" th:text="#{editions}"></a>
+            <a class="nav-link" th:href="@{/admin/applications}" th:text="#{orders}"></a>
+            <a class="nav-link disabled" th:text="#{black list}"></a>
+        </nav>
+    </div>
+    <div class="col-sm-10">
+        <div th:unless="${editList==null}">
+            <input type="button" onclick="window.location.href = '/admin/addEdition';" th:value="Добавить"/>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+            </button>
+            <table class="table">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{edition title}"></th>
+                    <th scope="col" th:text="#{price per month}"></th>
+                </tr>
+                <tr th:each="edit : ${editList}" th:object="${edit}">
+                    <td th:text="*{id}"></a></td>
+                    <td><a th:href="@{/editions/edition(id=*{id})}" th:text="*{title}"></a></td>
+                    <td th:text="*{pricePerMonth}"></td>
+                    <td><a th:href="@{deleteEdition(id=*{id})}" th:text="#{delete}"></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-10">
-            <div th:unless="${editList==null}">
-                <table class="table">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col" th:text="#{edition title}"></th>
-                        <th scope="col" th:text="#{price per month}"></th>
-                    </tr>
-                    <tr th:each="edit : ${editList}" th:object="${edit}">
-                        <td th:text="*{id}"></a></td>
-                        <td><a th:href="@{/editions/edition(id=*{id})}" th:text="*{title}"></a></td>
-                        <td th:text="*{pricePerMonth}"></td>
-                    </tr>
-                </table>
-            </div>
-            <div th:unless="${users==null}">
-                <table class="table">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col" th:text="#{full name}"></th>
-                        <th scope="col">Email</th>
-                        <th scope="col"></th>
-                    </tr>
-                    <tr th:each="user : ${users}" th:object="${user}">
-                        <td th:text="*{id}"></a></td>
-                        <td th:text="*{name}"></td>
-                        <td th:text="*{email}"></td>
-                        <td><a th:href="@{userDelete(id=*{id})}" th:text="#{delete}"></a></td>
-                    </tr>
-                </table>
-            </div>
-            <div th:unless="${applications==null}">
-                <table class="table">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col" th:text="#{order date}"></th>
-                        <th scope="col" th:text="#{full name}"></th>
-                        <th scope="col" th:text="#{edition}"></th>
-                        <th scope="col" th:text="#{subscription term}"></th>
-                        <th scope="col" th:text="#{sum}"></th>
-                    </tr>
-                    <tr th:each="appl : ${applications}" th:object="${appl}">
-                        <td th:text="*{id}"></td>
-                        <td th:text="*{date}"></td>
-                        <td th:each="us : *{user}" th:text="${us.name}"></td>
-                        <td>
-                            <table class="table" th:each="edition : *{listEditionAp}">
-                                <tr th:each="ed : ${edition.edition}" th:text="${ed.title}"></tr>
-                            </table>
-                        </td>
-                        <td>
-                            <table class="table" th:each="edition : *{listEditionAp}">
-                                <tr th:text="${edition.numberOfMonths}"></tr>
-                            </table>
-                        </td>
-                        <td>
-                            <table class="table" th:each="edition : *{listEditionAp}">
-                                <tr th:each="ed : ${edition.edition}"
-                                    th:text="${ed.pricePerMonth}*${edition.numberOfMonths}"></tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div th:unless="${users==null}">
+            <table class="table">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{full name}"></th>
+                    <th scope="col">Email</th>
+                    <th scope="col"></th>
+                </tr>
+                <tr th:each="user : ${users}" th:object="${user}">
+                    <td th:text="*{id}"></a></td>
+                    <td th:text="*{name}"></td>
+                    <td th:text="*{email}"></td>
+                    <td><a th:href="@{userDelete(id=*{id})}" th:text="#{delete}"></a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:unless="${applications==null}">
+            <table class="table">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{order date}"></th>
+                    <th scope="col" th:text="#{full name}"></th>
+                    <th scope="col" th:text="#{edition}"></th>
+                    <th scope="col" th:text="#{subscription term}"></th>
+                    <th scope="col" th:text="#{sum}"></th>
+                </tr>
+                <tr th:each="appl : ${applications}" th:object="${appl}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{date}"></td>
+                    <td th:each="us : *{user}" th:text="${us.name}"></td>
+                    <td>
+                        <table class="table" th:each="edition : *{listEditionAp}">
+                            <tr th:each="ed : ${edition.edition}" th:text="${ed.title}"></tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table" th:each="edition : *{listEditionAp}">
+                            <tr th:text="${edition.numberOfMonths}"></tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table" th:each="edition : *{listEditionAp}">
+                            <tr th:each="ed : ${edition.edition}"
+                                th:text="${ed.pricePerMonth}*${edition.numberOfMonths}"></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+</div>
 
 </body>
 </html>

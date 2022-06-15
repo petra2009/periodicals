@@ -25,14 +25,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers("/*","/{\\id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                    .antMatchers("/*", "/**").hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/admin/*").hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/listEdition/*", "/profile/*").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .and()
                     .formLogin()
 
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/*","/**")
+                    .antMatchers("/*")
                     .permitAll()
                 .and()
                     .formLogin()
