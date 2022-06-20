@@ -14,11 +14,4 @@ public interface ListEditionRepository extends CrudRepository<ListEdition, Integ
 
 
 
-
-   // void deleteListEdition(ListEdition listEdition);
-
-   // ListEdition findListEditionById(int id);
-
-
-
 }

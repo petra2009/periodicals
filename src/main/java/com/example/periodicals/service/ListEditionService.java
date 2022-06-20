@@ -18,6 +18,8 @@ public interface ListEditionService {
 
     void deleteById(int id);
 
+    void payApplication();
+
    // ListEdition findListEditionById(int id);
 
 

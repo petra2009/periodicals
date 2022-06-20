@@ -63,4 +63,10 @@ public class ListEditionController {
         return "redirect:/{id}/listEdition";
     }
 
+    @PostMapping("/payApplication")
+    public String getPayApplication () {
+        listEditionService.payApplication();
+        return "/editions";
+    }
+
 }

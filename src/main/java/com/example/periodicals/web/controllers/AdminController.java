@@ -67,7 +67,7 @@ public class AdminController {
     public String getDeleteEdition(@RequestParam("id") int id) {
         System.out.println("Controller: "+id);
         editionService.deleteEditionById(id);
-        return "adminPage/editions";
+        return "redirect:/admin/editions";
     }
 
     @ModelAttribute("edition")
@@ -75,17 +75,12 @@ public class AdminController {
         return new Edition();
     }
 
-    @GetMapping("/addEdition")
-    public String getAddEdition() {
-        return "addEdition";
-    }
-
-    @PostMapping("/addEdition")
+    @PostMapping("/editions")
     public String getSaveEdition(@Valid Edition edition, Errors error) {
         if (error.hasErrors())
             return "editions";
         editionService.addEdition(edition);
-        return "redirect: admin/editions";
+        return "redirect:/admin/editions";
     }
 
 }

@@ -10,25 +10,38 @@
 <body>
 
 <div th:replace="home::menu"></div>
+<div th:replace="home::header"></div>
+<div th:replace="home::navigation"></div>
 
-<div>
+
+<div class="container">
     <table class="table">
-        <tr  th:each="editionList : ${editList}">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Название</th>
+            <th scope="col">количество месяцев подписки</th>
+            <th scope="col">Сумма</th>
+            <th></th>
+        </tr>
+        <tr th:each="editionList : ${editList}">
             <td th:text="${editionList.id}"></td>
             <td th:each="edition : ${editionList.edition}" th:text="${edition.title}"></td>
             <td th:text="${editionList.numberOfMonths}"></td>
-            <td th:each="edition : ${editionList.edition}" th:text="${edition.pricePerMonth}*${editionList.numberOfMonths}"></td>
+            <td th:each="edition : ${editionList.edition}"
+                th:text="${edition.pricePerMonth}*${editionList.numberOfMonths}"></td>
             <form th:action="@{/user/deleteListEdition}" method="post">
                 <input type="hidden" name="id" th:value="${editionList.id}">
-                <td><button type="submit" th:value="#{delete}"></button></td>
+                <td>
+                    <button class="btn btn-outline-secondary btn-sm" type="submit" th:text="#{delete}"></button>
+                </td>
             </form>
-
-
         </tr>
     </table>
-    <p th:text="${basket}"></p>
-
-
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <form th:action="@{/user/payApplication}" method="post">
+            <button type="submit" class="btn btn-outline-secondary btn-sm" th:text="#{pay}"></button>
+        </form>
+    </div>
 
 </div>
 

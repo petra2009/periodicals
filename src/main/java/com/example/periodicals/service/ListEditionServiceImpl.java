@@ -45,6 +45,7 @@ public class ListEditionServiceImpl implements ListEditionService {
         Application application;
         if (applicationId == 0) {
             application = new Application(LocalDate.now(), user);
+            applicationRepository.save(application);
         } else
             application = applicationRepository.findById(applicationId).get();
         ListEdition listEdition = new ListEdition();
@@ -75,5 +76,13 @@ public class ListEditionServiceImpl implements ListEditionService {
     @Override
     public void deleteById(int id) {
         listEditionRepository.deleteById(id);
+    }
+
+    @Override
+    public void payApplication(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();   //челик из UserDetails
+        User user = userService.findUserByLogin(auth.getName());
+        user.setCurrentApplicationId(0);
+        userService.save(user);
     }
 }

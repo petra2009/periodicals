@@ -40,10 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .usernameParameter("login")
                     .passwordParameter("pass")
-                    .defaultSuccessUrl("/home")
+                    .defaultSuccessUrl("/")
                 .and()
                     .logout()
-                    .logoutSuccessUrl("/home")
+                    .logoutSuccessUrl("/")
                 //.and().csrf().disable()
         ;
     }
