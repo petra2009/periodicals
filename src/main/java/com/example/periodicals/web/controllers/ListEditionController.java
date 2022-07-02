@@ -66,7 +66,7 @@ public class ListEditionController {
     @PostMapping("/payApplication")
     public String getPayApplication () {
         listEditionService.payApplication();
-        return "/editions";
+        return "editions";
     }
 
 }
